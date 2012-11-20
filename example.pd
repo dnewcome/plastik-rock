@@ -7,7 +7,6 @@
 -1 -1;
 #X msg 165 41 \; downhat 4 \; uphat 0 \; centhat 15;
 #X msg 156 191 \; downhat 5 \; uphat 7 \; centhat 6;
-#X obj 152 290 guitarhero 1 14 10 9 11 12 7;
 #X text 357 130 block head controller;
 #X text 340 286 redoctane controller;
 #X text 126 2 select 'use hat' and then bang one of the hat mapping
@@ -25,21 +24,22 @@ messages to enable using pov hat for strum.;
 #X text -21 227 manual button mapping messages;
 #X text -27 59 manual note mapping messages;
 #X msg -21 248 23 24 25 22 26 1;
-#X msg -14 272 14 10 9 11 12 7;
-#X obj 168 130 guitarhero 1 23 24 25 22 26 1;
 #X obj 156 362 guitarhero 1;
-#X msg -21 299 \; fret1 \$1 \; fret2 \$2 \; fret3 \$3 \; fret4 \$4
-\; fret5 \$5;
 #X obj 153 325 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X connect 0 0 19 0;
-#X connect 1 0 5 0;
-#X connect 2 0 5 1;
-#X connect 10 0 9 0;
-#X connect 11 0 9 0;
-#X connect 12 0 19 1;
+#X obj 152 290 guitarhero 1 14 10 9 11 12 7;
+#X obj 168 130 guitarhero 1 23 24 25 22 26 1;
+#X msg -21 299 \; fret1 \$1 \; fret2 \$2 \; fret3 \$3 \; fret4 \$4
+\; fret5 \$5 \; sbup \$6 \; sbdown \$7;
+#X msg -14 272 14 10 9 11 12 7 21 23;
+#X connect 0 0 20 0;
+#X connect 1 0 19 0;
+#X connect 2 0 19 1;
+#X connect 9 0 8 0;
+#X connect 10 0 8 0;
+#X connect 11 0 20 1;
+#X connect 12 0 20 2;
 #X connect 13 0 19 2;
-#X connect 14 0 5 2;
-#X connect 17 0 21 0;
-#X connect 18 0 21 0;
-#X connect 22 0 20 0;
+#X connect 16 0 21 0;
+#X connect 18 0 17 0;
+#X connect 22 0 21 0;

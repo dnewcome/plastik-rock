@@ -27,3 +27,6 @@ Support for certain additional controllers and USB interfaces is ongoing. Severa
 Game controllers are available to the author so it's likely that Plastik Rock 
 will support these controllers eventually. Other controllers will probably work
 but may have some features that won't work correctly (typically the whammy bar).
+
+A Linux version using the hid object should be forthcoming, but my current 
+audio laptop is Windows so it may be some time before I get around to it.

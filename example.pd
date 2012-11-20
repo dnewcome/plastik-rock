@@ -15,21 +15,31 @@ messages to enable using pov hat for strum.;
 #X msg -27 131 \; btn1 \$1 \; btn2 \$2 \; btn3 \$3 \; btn4 \$4 \; btn5
 \$5;
 #X msg -20 104 70 71 72 73 74;
-#X text -27 59 manual key mapping messages;
 #X msg -27 80 60 61 62 63 64;
-#X obj 168 130 guitarhero 1 23 24 25 22 26 1;
-#X obj 155 363 guitarhero 1;
 #X obj 222 103 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 277 103 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 258 256 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X connect 0 0 13 0;
+#X text -21 227 manual button mapping messages;
+#X text -27 59 manual note mapping messages;
+#X msg -21 248 23 24 25 22 26 1;
+#X msg -14 272 14 10 9 11 12 7;
+#X obj 168 130 guitarhero 1 23 24 25 22 26 1;
+#X obj 156 362 guitarhero 1;
+#X msg -21 299 \; fret1 \$1 \; fret2 \$2 \; fret3 \$3 \; fret4 \$4
+\; fret5 \$5;
+#X obj 153 325 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X connect 0 0 19 0;
 #X connect 1 0 5 0;
 #X connect 2 0 5 1;
 #X connect 10 0 9 0;
-#X connect 12 0 9 0;
-#X connect 15 0 13 1;
-#X connect 16 0 13 2;
-#X connect 17 0 5 2;
+#X connect 11 0 9 0;
+#X connect 12 0 19 1;
+#X connect 13 0 19 2;
+#X connect 14 0 5 2;
+#X connect 17 0 21 0;
+#X connect 18 0 21 0;
+#X connect 22 0 20 0;

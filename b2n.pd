@@ -25,10 +25,12 @@
 #X obj 128 179 f 0;
 #X text 16 172 store last value \, otherwise octave shifts will result
 in stuck notes;
-#X obj 220 -71 inlet note;
+#X obj 290 -72 inlet note;
 #X obj 133 -72 inlet stream;
-#X text 221 -92 override creation arg;
+#X text 302 -93 override creation arg;
 #X text 353 -24 retrig input;
+#X obj 217 -72 inlet fret;
+#X text 214 -103 override fret button number;
 #X connect 1 0 7 0;
 #X connect 1 0 19 0;
 #X connect 2 0 8 0;
@@ -54,3 +56,4 @@ in stuck notes;
 #X connect 21 0 7 1;
 #X connect 21 0 8 1;
 #X connect 22 0 18 0;
+#X connect 25 0 18 1;

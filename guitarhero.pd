@@ -1,0 +1,252 @@
+#N canvas 718 66 871 764 10;
+#X obj 144 86 hidin;
+#X obj 226 143 noteout;
+#X obj 194 108 print;
+#X obj 144 4 inlet;
+#X obj 145 31 f \$1;
+#X msg 144 54 open \$1 \, start;
+#N canvas 741 78 653 542 strum 1;
+#N canvas 0 0 589 471 hat2btn 1;
+#X text 144 20 convert hat values to button presses;
+#X obj 100 22 inlet;
+#X text 184 118 0 is down \, 4 is up \, 15 is no presses;
+#X obj 83 223 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 138 218 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 171 148 f 0;
+#X text 202 140 in some cases this doesn't work well \, like when using
+the directional pad insstead of the strum bar. We rely on message 15
+to come down the stream in order to turn off the previous hat button
+press.;
+#X obj 47 290 outlet up;
+#X obj 125 291 outlet down;
+#X obj 119 178 f 0;
+#X obj 55 196 f 0;
+#X obj 49 154 t b b;
+#X obj 105 148 t b b;
+#X text 229 197 the triggers here are so that the previous note is
+muted just before the new note is triggered. Otherwise the note will
+be trggered and immediately muted \, causing a short staccato note
+instead of an arbitrarily long note. Note also that we have to explicitly
+mute the notes using a sort of mutual exclusion with the float boxes
+here. Failure to do this will cause stuck notes because fast strumming
+will result in a missing 15 hat press that is normally present during
+slow strums. Probably this is due to the polling frequency of the USB
+interface or maybe the controller itself.;
+#X text 37 318 the current retrig scheme doesn't make use of discrete
+up/down outlets \, we treat any ouput here as a note retrig. We can
+later on do something like alternating notes \, etc.;
+#N canvas 257 587 450 300 dynsel 0;
+#X obj 122 95 sel;
+#X obj 265 40 r centhat;
+#X obj 184 95 sel;
+#X obj 247 95 sel;
+#X obj 99 12 inlet;
+#X obj 117 172 outlet;
+#X obj 181 172 outlet;
+#X obj 247 172 outlet;
+#X obj 303 172 outlet;
+#X obj 129 40 r uphat;
+#X obj 204 40 r downhat;
+#X connect 0 0 5 0;
+#X connect 0 1 2 0;
+#X connect 1 0 3 1;
+#X connect 2 0 6 0;
+#X connect 2 1 3 0;
+#X connect 3 0 7 0;
+#X connect 3 1 8 0;
+#X connect 4 0 0 0;
+#X connect 9 0 0 1;
+#X connect 10 0 2 1;
+#X restore 96 98 pd dynsel;
+#X text 163 58 hat button select;
+#X obj 102 60 route \$7;
+#X connect 1 0 17 0;
+#X connect 3 0 7 0;
+#X connect 4 0 8 0;
+#X connect 5 0 4 0;
+#X connect 5 0 3 0;
+#X connect 9 0 4 0;
+#X connect 10 0 3 0;
+#X connect 11 0 4 0;
+#X connect 11 1 10 0;
+#X connect 12 0 3 0;
+#X connect 12 1 9 0;
+#X connect 15 0 12 0;
+#X connect 15 1 11 0;
+#X connect 15 2 5 0;
+#X connect 17 0 15 0;
+#X restore 258 287 pd hat2btn;
+#X obj 331 119 inlet stream;
+#X obj 335 201 spigot;
+#X obj 423 120 inlet use_hat;
+#X obj 401 200 spigot;
+#X obj 428 163 != 1;
+#X text 439 253 use buttons specified by creation arguments;
+#X text 230 265 use hat control for strum;
+#X obj 324 367 s trigger;
+#X obj 403 273 route \$6 \$7;
+#X connect 0 0 8 0;
+#X connect 0 1 8 0;
+#X connect 1 0 2 0;
+#X connect 1 0 4 0;
+#X connect 2 0 0 0;
+#X connect 3 0 2 1;
+#X connect 3 0 5 0;
+#X connect 4 0 9 0;
+#X connect 5 0 4 1;
+#X connect 9 0 8 0;
+#X connect 9 1 8 0;
+#X restore 155 171 pd strum;
+#X obj 213 170 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X text 234 165 use hat;
+#N canvas 159 427 655 426 octave 0;
+#X floatatom 373 114 5 0 0 0 - - -;
+#X obj 362 24 moses 1;
+#X obj 305 24 moses 1;
+#X obj 443 181 s octave;
+#X obj 313 -53 inlet stream;
+#X text 394 -35 buttons select and start are hard coded here. Also
+\, requires button behavior \, won't work with hat buttons.;
+#X obj 423 72 expr $f3 + $f2;
+#X obj 475 23 loadbang;
+#X obj 532 23 f 12;
+#X obj 539 -64 inlet interval;
+#X obj 314 -12 route 30 31;
+#X obj 298 72 expr $f2 - $f3;
+#X connect 0 0 3 0;
+#X connect 0 0 6 1;
+#X connect 0 0 11 1;
+#X connect 1 0 6 0;
+#X connect 2 0 11 0;
+#X connect 4 0 10 0;
+#X connect 6 0 0 0;
+#X connect 7 0 8 0;
+#X connect 8 0 6 2;
+#X connect 8 0 11 2;
+#X connect 9 0 8 0;
+#X connect 10 0 2 0;
+#X connect 10 1 1 0;
+#X connect 11 0 0 0;
+#X restore 147 241 pd octave;
+#X obj 211 242 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#N canvas 0 0 450 300 selector 0;
+#X obj 180 26 inlet;
+#X obj 154 236 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj 169 66 route 2;
+#X obj 157 121 sel 25 76 150 178 229;
+#X obj 157 158 f 1;
+#X obj 186 159 f 2;
+#X obj 216 159 f 3;
+#X obj 246 158 f 4;
+#X obj 278 159 f 5;
+#X text 255 23 map the rock band guitar pickup selector to a numeric
+value.;
+#X connect 0 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 3 1 5 0;
+#X connect 3 2 6 0;
+#X connect 3 3 7 0;
+#X connect 3 4 8 0;
+#X connect 4 0 1 0;
+#X connect 5 0 1 0;
+#X connect 6 0 1 0;
+#X connect 7 0 1 0;
+#X connect 8 0 1 0;
+#X restore 139 281 pd selector;
+#N canvas 553 80 467 370 bend 0;
+#X obj 197 31 inlet;
+#X obj 167 211 bendout;
+#X obj 182 69 route 3;
+#X obj 266 185 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X obj 159 105 sel 127;
+#X obj 250 140 f 0;
+#X obj 162 150 * 30;
+#X text 7 130 todo: fix this multiplier;
+#X text 234 93 controller whammy bar outputs 127 at zero position \,
+so handle special case when bar is at neutral;
+#X connect 0 0 2 0;
+#X connect 2 0 4 0;
+#X connect 4 0 5 0;
+#X connect 4 1 6 0;
+#X connect 5 0 1 0;
+#X connect 6 0 3 0;
+#X connect 6 0 1 0;
+#X restore 152 210 pd bend;
+#X obj 282 125 print note;
+#N canvas 610 451 450 300 frets 0;
+#X obj 55 16 inlet stream;
+#X obj 55 157 outlet note;
+#X obj 55 103 b2n \$2 61;
+#X obj 106 48 r btn1;
+#X obj 166 48 r btn2;
+#X obj 229 48 r btn3;
+#X obj 290 48 r btn4;
+#X obj 351 48 r btn5;
+#X obj 115 103 b2n \$3 62;
+#X obj 178 103 b2n \$4 63;
+#X obj 239 103 b2n \$5 64;
+#X obj 300 103 b2n \$6 65;
+#X connect 0 0 2 0;
+#X connect 0 0 8 0;
+#X connect 0 0 9 0;
+#X connect 0 0 10 0;
+#X connect 0 0 11 0;
+#X connect 2 0 1 0;
+#X connect 3 0 2 1;
+#X connect 4 0 8 1;
+#X connect 5 0 9 1;
+#X connect 6 0 10 1;
+#X connect 7 0 11 1;
+#X connect 8 0 1 0;
+#X connect 9 0 1 0;
+#X connect 10 0 1 0;
+#X connect 11 0 1 0;
+#X restore 158 130 pd frets;
+#N canvas 0 0 671 546 mapfrets 0;
+#X obj 206 116 t l;
+#X obj 131 38 notein;
+#X obj 131 156 list split 5;
+#X obj 131 118 list;
+#X obj 131 78 spigot;
+#X obj 131 196 sort;
+#X obj 154 245 print sorted;
+#X msg 131 283 \; btn1 \$1 \; btn2 \$2 \; btn3 \$3 \; btn4 \$4 \; btn5
+\$5;
+#X text 217 16 send fret button mapping message on midi input Last
+5 played notes are mapped across the fret buttons lowest to highest.
+Duplicated notes are mapped twice.;
+#X connect 0 0 3 1;
+#X connect 1 0 4 0;
+#X connect 1 1 4 1;
+#X connect 2 0 5 0;
+#X connect 3 0 2 0;
+#X connect 3 0 0 0;
+#X connect 4 0 3 0;
+#X connect 5 0 6 0;
+#X connect 5 0 7 0;
+#X restore 348 281 pd mapfrets;
+#X text 273 239 shift interval can be overridden here;
+#X obj 209 4 inlet;
+#X msg 209 29 close;
+#X connect 0 0 2 0;
+#X connect 0 0 6 0;
+#X connect 0 0 9 0;
+#X connect 0 0 11 0;
+#X connect 0 0 12 0;
+#X connect 0 0 14 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 0 0;
+#X connect 7 0 6 1;
+#X connect 10 0 9 1;
+#X connect 14 0 1 0;
+#X connect 14 0 13 0;
+#X connect 17 0 18 0;
+#X connect 18 0 0 0;

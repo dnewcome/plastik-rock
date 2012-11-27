@@ -1,10 +1,10 @@
-#N canvas 471 287 1012 643 10;
+#N canvas 222 45 1012 643 10;
 #X obj -12 364 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X msg 356 112 60 61 62 63 64;
 #X obj -38 41 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#X msg 137 79 14 10 9 11 12 21 23 18 17 1;
+#X msg 114 66 14 10 9 11 12 21 23 18 17 1;
 #X text 240 311 depending on controller configuration \, the POV hat
 might be used for the strum bar. If this is the case \, enable 'use
 hat'and send messages to configure hat directions for strumming.;
@@ -19,7 +19,7 @@ buttons.;
 -1;
 #X text -45 -47 usage: [guitarhero device_number fret1-5 strum_up strum_down
 shift_down shift_up whammy];
-#X text 134 28 Hit buttons on the controller to see which control numbers
+#X text 111 15 Hit buttons on the controller to see which control numbers
 are in use \, then form a button mapping message using the following
 message template.;
 #X text -14 417 Button parameters can also be given as creation arguments.
@@ -30,16 +30,19 @@ cause PD to hang.;
 first creation argument.;
 #X text -11 499 Some controller modes may use the same axis for both
 strum and whammy bar. These modes are not yet supported.;
-#X obj -12 396 guitarhero 1 23 24 25 22 26 1 1 30 31 3;
 #X msg 74 343 \; whammy 3;
 #X msg 151 291 \; usehat 1 \; hatbtn 1 \; downhat 4 \; uphat 0 \; centhat
 15 \; bendmode 1;
 #X msg 137 106 \; fret1 \$1 \; fret2 \$2 \; fret3 \$3 \; fret4 \$4
 \; fret5 \$5 \; sbup \$6 \; sbdown \$7 \; octdn \$8 \; octup \$9 \;
 whammy \$10 \; bendmode 0;
-#X obj -38 74 guitarhero 1;
-#X connect 0 0 16 0;
+#X obj -38 74 guitarhero 12;
+#X msg 224 89 btn_1 btn_2 btn_3 btn_0 btn_4 abs_hat0y abs_hat0y btn_8
+btn_9 abs_z 1;
+#X obj -12 396 guitarhero 1 23 24 25 22 26 1 1 30 31 3;
+#X connect 0 0 21 0;
 #X connect 1 0 6 0;
-#X connect 2 0 20 0;
-#X connect 3 0 19 0;
+#X connect 2 0 19 0;
+#X connect 3 0 18 0;
 #X connect 9 0 8 0;
+#X connect 20 0 18 0;

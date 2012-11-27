@@ -1,11 +1,11 @@
-#N canvas 718 66 871 764 10;
+#N canvas 814 188 871 764 10;
 #X obj 144 86 hidin;
 #X obj 239 169 noteout;
 #X obj 295 169 print;
 #X obj 144 30 f \$1;
 #X msg 144 54 open \$1 \, start;
-#N canvas 800 77 653 542 strum 1;
-#N canvas 0 0 589 471 hat2btn 1;
+#N canvas 800 77 653 542 strum 0;
+#N canvas 0 0 589 471 hat2btn 0;
 #X text 144 20 convert hat values to button presses;
 #X obj 100 22 inlet;
 #X text 184 118 0 is down \, 4 is up \, 15 is no presses;
@@ -179,8 +179,8 @@ value.;
 #X obj 99 60 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
 #X obj 199 79 sel 127;
-#X obj 166 297 bendout;
-#X obj 181 247 nbx 10 14 -1e+037 1e+037 0 0 empty empty empty 0 -8
+#X obj 143 387 bendout;
+#X obj 155 359 nbx 10 14 -1e+037 1e+037 0 0 empty empty empty 0 -8
 0 10 -262144 -1 -1 0 256;
 #X obj 167 215 * 64;
 #X obj 98 95 f 129;
@@ -194,8 +194,16 @@ do this;
 #X text 252 72 controller whammy bar outputs 127 at zero position \,
 so handle special case when bar is at neutral otherwise we might get
 stuck at a slight bend even when the whammy bar is neutral.;
+#X obj 74 232 * -32;
+#X obj 68 185 + 1;
+#X obj 195 239 r bendmode;
+#X obj 127 314 spigot;
+#X obj 183 313 spigot;
+#X obj 192 274 expr !$f1;
+#X text 262 240 setting bendmode = 1 sets 0-255 mode \, 0 is 127-0
+;
 #X connect 0 0 2 0;
-#X connect 1 0 9 0;
+#X connect 1 0 8 0;
 #X connect 2 0 6 0;
 #X connect 3 0 2 1;
 #X connect 4 0 9 0;
@@ -203,9 +211,17 @@ stuck at a slight bend even when the whammy bar is neutral.;
 #X connect 6 0 1 0;
 #X connect 6 1 5 0;
 #X connect 6 1 4 0;
+#X connect 6 1 16 0;
 #X connect 8 0 7 0;
-#X connect 9 0 8 0;
+#X connect 9 0 19 0;
 #X connect 10 0 4 1;
+#X connect 15 0 18 0;
+#X connect 16 0 15 0;
+#X connect 17 0 18 1;
+#X connect 17 0 20 0;
+#X connect 18 0 8 0;
+#X connect 19 0 8 0;
+#X connect 20 0 19 0;
 #X restore 160 241 pd bend;
 #X obj 163 169 print note;
 #N canvas 497 658 450 300 frets 0;
@@ -276,12 +292,7 @@ Duplicated notes are mapped twice.;
 #X text 513 5 send a bang on the first inlet to open the hid device
 and start listening for button presses. Bang to second inlet closes
 the hid device.;
-#X obj 302 4 inlet usehat;
-#X text 514 50 third inlet select whether or not the POV hat should
-be used for strumming. This may be necessary depending on the USB interface
-used and the particular model of Rock Band/Guitar Hero controller used.
-;
-#X obj 386 4 inlet interval;
+#X obj 341 7 inlet interval;
 #X text 513 108 fourth inlet specifies how many semitones up/down interval
 buttons move. Default is 12 semitones (1 octave).;
 #X text 312 292 experimental on-the-fly fret mapping using external
@@ -289,6 +300,11 @@ midi input;
 #X text 354 157 Block Head controller using USB Guitar Hero mode spews
 spurious data on buttons 19 \, 20 \, 21 We need to filter this to do
 anything useful with this controller.;
+#X obj 263 57 r usehat;
+#X text 514 50 usehat message selects whether or not the POV hat should
+be used for strumming. This may be necessary depending on the USB interface
+used and the particular model of Rock Band/Guitar Hero controller used.
+;
 #X connect 0 0 2 0;
 #X connect 0 0 5 0;
 #X connect 0 0 6 0;
@@ -302,5 +318,5 @@ anything useful with this controller.;
 #X connect 12 0 0 0;
 #X connect 13 0 3 0;
 #X connect 14 0 12 0;
-#X connect 16 0 5 1;
-#X connect 18 0 6 1;
+#X connect 16 0 6 1;
+#X connect 20 0 5 1;

@@ -1,0 +1,16 @@
+#N canvas 501 129 450 300 10;
+#X obj 138 48 inlet;
+#X obj 138 217 outlet;
+#X obj 137 137 expr ! $f1;
+#X obj 154 82 loadbang;
+#X obj 155 109 f 0;
+#X text 233 53 not function Expresses the inverse logical state of
+its input. Output asserted high on initialization;
+#X text 127 15 inlet is a float value not defined for other message
+types;
+#X text 229 116 zero at input forces output high all other values force
+output low;
+#X connect 0 0 2 0;
+#X connect 2 0 1 0;
+#X connect 3 0 4 0;
+#X connect 4 0 2 0;

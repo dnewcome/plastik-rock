@@ -1,0 +1,23 @@
+#N canvas 127 51 503 352 10;
+#X obj 184 17 inlet;
+#X obj 189 235 outlet;
+#X obj 275 235 outlet;
+#X obj 190 54 t f f;
+#X obj 159 146 spigot;
+#X obj 238 148 spigot;
+#X obj 186 116 == \$1;
+#X obj 250 116 != \$1;
+#X text 5 259 passes float if it matches creation arg. this is like
+a version of sel that puts out the value instead of bang.;
+#X obj 265 16 inlet condition;
+#X connect 0 0 3 0;
+#X connect 3 0 4 0;
+#X connect 3 0 5 0;
+#X connect 3 1 6 0;
+#X connect 3 1 7 0;
+#X connect 4 0 1 0;
+#X connect 5 0 2 0;
+#X connect 6 0 4 1;
+#X connect 7 0 5 1;
+#X connect 9 0 7 1;
+#X connect 9 0 6 1;

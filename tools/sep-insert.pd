@@ -1,0 +1,19 @@
+#N canvas 19 22 450 300 10;
+#X obj 134 -16 inlet;
+#X obj 131 202 outlet;
+#X obj 131 110 f 0;
+#X obj 132 83 t f b;
+#X text 224 65 insert zero separator between consecutive values that
+are the same;
+#X obj 133 19 t f f;
+#X obj 192 -14 inlet sep value;
+#X obj 133 53 tools/pass-if;
+#X connect 0 0 5 0;
+#X connect 2 0 1 0;
+#X connect 3 0 1 0;
+#X connect 3 1 2 0;
+#X connect 5 0 7 1;
+#X connect 5 1 7 0;
+#X connect 6 0 2 1;
+#X connect 7 0 3 0;
+#X connect 7 1 1 0;

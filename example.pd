@@ -11,7 +11,7 @@ hat'and send messages to configure hat directions for strumming.;
 #X text -19 40 start;
 #X msg 356 146 \; btn1 \$1 \; btn2 \$2 \; btn3 \$3 \; btn4 \$4 \; btn5
 \$5 \;;
-#X text 322 55 Then pick some MIDI note numbers to map over the fret
+#X text 351 75 Then pick some MIDI note numbers to map over the fret
 buttons.;
 #X obj -48 279 bng 15 250 50 0 empty empty empty 17 7 0 10 -1 -1 -1
 ;
@@ -36,13 +36,19 @@ strum and whammy bar. These modes are not yet supported.;
 #X msg 137 106 \; fret1 \$1 \; fret2 \$2 \; fret3 \$3 \; fret4 \$4
 \; fret5 \$5 \; sbup \$6 \; sbdown \$7 \; octdn \$8 \; octup \$9 \;
 whammy \$10 \; bendmode 0;
-#X obj -38 74 guitarhero 12;
-#X msg 224 89 btn_1 btn_2 btn_3 btn_0 btn_4 abs_hat0y abs_hat0y btn_8
+#X msg 520 -4 btn_1 btn_2 btn_3 btn_0 btn_4 abs_hat0y abs_hat0y btn_8
 btn_9 abs_z 1;
 #X obj -12 396 guitarhero 1 23 24 25 22 26 1 1 30 31 3;
-#X connect 0 0 21 0;
+#X obj -38 74 guitarhero 4;
+#X msg 550 122 btn_5 btn_1 btn_0 btn_2 btn_3 abs_y abs_y btn_8 btn_9
+abs_z 1;
+#X text 644 103 red guitar w/ greenasia ps2 adapter on mac;
+#X msg 557 156 \; usehat 1 \; hatbtn abs_y \; downhat 255 \; uphat
+0 \; centhat 127 \; bendmode 1;
+#X connect 0 0 20 0;
 #X connect 1 0 6 0;
-#X connect 2 0 19 0;
+#X connect 2 0 21 0;
 #X connect 3 0 18 0;
 #X connect 9 0 8 0;
-#X connect 20 0 18 0;
+#X connect 19 0 18 0;
+#X connect 22 0 18 0;

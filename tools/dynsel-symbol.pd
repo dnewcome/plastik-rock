@@ -1,0 +1,16 @@
+#N canvas 0 22 450 300 10;
+#X obj 183 45 list split 1;
+#X obj 201 140 list;
+#X obj 183 100 sel s;
+#X obj 274 69 symbol;
+#X obj 200 190 outlet;
+#X text 141 244 dynamic routing with symbols instead of floats;
+#X obj 274 5 inlet selector;
+#X obj 183 5 inlet stream;
+#X connect 0 0 2 0;
+#X connect 0 1 1 1;
+#X connect 1 0 4 0;
+#X connect 2 0 1 0;
+#X connect 3 0 2 1;
+#X connect 6 0 3 0;
+#X connect 7 0 0 0;

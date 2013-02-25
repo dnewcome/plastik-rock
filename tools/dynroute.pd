@@ -1,0 +1,18 @@
+#N canvas 391 286 450 300 10;
+#X obj 172 29 inlet signal;
+#X obj 269 33 inlet selector;
+#X obj 173 81 list split 1;
+#X obj 186 166 list;
+#X obj 168 126 sel s;
+#X obj 272 260 outlet no match;
+#X obj 146 264 outlet match;
+#X obj 268 95 symbol;
+#X text 48 3 workaround for route not taking a param;
+#X connect 0 0 2 0;
+#X connect 1 0 7 0;
+#X connect 2 0 4 0;
+#X connect 2 1 3 1;
+#X connect 3 0 6 0;
+#X connect 4 0 3 0;
+#X connect 4 1 5 0;
+#X connect 7 0 4 1;

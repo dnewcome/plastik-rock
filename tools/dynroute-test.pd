@@ -1,0 +1,9 @@
+#N canvas 452 315 450 300 10;
+#X msg 142 30 key b_1 0;
+#X msg 206 61 key;
+#X obj 140 148 print;
+#X obj 143 102 dynroute;
+#X text 229 155 comment;
+#X connect 0 0 3 0;
+#X connect 1 0 3 1;
+#X connect 3 0 2 0;

@@ -1,0 +1,1 @@
+call "C:\Program Files (x86)\batbelt\pd-extended\bin\pd.exe" -noaudio -midioutdev 2 example.pd
